@@ -6,7 +6,8 @@ import java.util.stream.IntStream;
 
 public class CribaEratostenes {
 
-	public static int[] generarCriba(int tope) {
+	public static int[] generarCriba(int tope) throws Exception {
+		if (tope <= 0) throw new Exception("Prime numbers cannot be equal or less than 0!");
 		if (tope == 1) return new int[0];
 		// >> Limite Superior
 		int limiteSuperior = (int) Math.sqrt(tope);
@@ -29,7 +30,7 @@ public class CribaEratostenes {
 		
 		return primos.stream().mapToInt(i -> i).toArray();
 	}
-	public static boolean esPrimo (int number) {
+	public static boolean esPrimo (int number) throws Exception {
 		List<Integer> primos = IntStream.of(generarCriba(number)).boxed().collect(Collectors.toList());
 		return primos.contains(number);
 	}
