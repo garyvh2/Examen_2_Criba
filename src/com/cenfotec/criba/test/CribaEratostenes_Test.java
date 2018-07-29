@@ -21,4 +21,17 @@ public class CribaEratostenes_Test {
 		assertArrayEquals(f20, CribaEratostenes.generarCriba(20));
 	}
 
+	@Test
+	public void IsPrime () {
+		// >> First 2
+		assertFalse(CribaEratostenes.esPrimo(1));
+		assertTrue(CribaEratostenes.esPrimo(2));
+		// >> Hundreds 
+		assertTrue(CribaEratostenes.esPrimo(191));
+		assertFalse(CribaEratostenes.esPrimo(198));
+		// >> Thousands
+		assertTrue(CribaEratostenes.esPrimo(8513));
+		assertFalse(CribaEratostenes.esPrimo(8520));
+	}
+	
 }

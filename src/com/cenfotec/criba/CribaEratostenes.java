@@ -1,10 +1,13 @@
 package com.cenfotec.criba;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CribaEratostenes {
 
 	public static int[] generarCriba(int tope) {
+		if (tope == 1) return new int[0];
 		// >> Limite Superior
 		int limiteSuperior = (int) Math.sqrt(tope);
 		// >> Array Dimension
@@ -25,5 +28,9 @@ public class CribaEratostenes {
 				primos.add(m);
 		
 		return primos.stream().mapToInt(i -> i).toArray();
+	}
+	public static boolean esPrimo (int number) {
+		List<Integer> primos = IntStream.of(generarCriba(number)).boxed().collect(Collectors.toList());
+		return primos.contains(number);
 	}
 }
