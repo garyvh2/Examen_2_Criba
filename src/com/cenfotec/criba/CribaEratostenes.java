@@ -5,37 +5,25 @@ import java.util.*;
 public class CribaEratostenes {
 
 	public static int[] generarCriba(int tope) {
-		int i,j ;
-		if (tope >= 2){
-			int dim = tope+1;
-			boolean[] primo = new boolean[dim];
-			
-			for (i = 0; i < dim; i++){
-				primo[i] = true;
+		// >> Limite Superior
+		int limiteSuperior = (int) Math.sqrt(tope);
+		// >> Array Dimension
+		int dim = tope + 1;
+		// >> Prime numbers
+		boolean[] primo = new boolean[dim];
+		List<Integer> primos = new ArrayList<Integer>();
+		
+		for (int m = 2; m <= limiteSuperior; m++)
+			if (!primo[m]) {
+				primos.add(m);
+				for (int k = m * m; k <= tope; k += m)
+					primo[k] = true;
 			}
-			primo[0] = primo[1] = false;
-			for (i = 2; i< Math.sqrt(dim) + 1; i++){
-				if (primo[i]){
-					for (j = 2*i; j < dim; j+=i){
-						primo[j] = false;
-					}
-				}
-			}
-			int cuenta = 0;
-			
-			for (i = 0; i < dim; i++){
-				if (primo[i])
-					cuenta++;
-			}
-			int[] primos = new int[cuenta];
-			for (i = 0,j=0; i < dim; i++){
-				if (primo[i])
-					primos[j++] = 1;
-			}
-			
-			return primos;
-		} else {
-			return new int[0];
-		}
+
+		for (int m = limiteSuperior; m <= tope; m++)
+			if (!primo[m])
+				primos.add(m);
+		
+		return primos.stream().mapToInt(i -> i).toArray();
 	}
 }
